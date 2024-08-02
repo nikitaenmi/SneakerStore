@@ -37,7 +37,7 @@ func IdAdd(bot *telego.Bot, update telego.Update) {
 		user := mod.User{Lastname: userIDstring} // Добавление ID в БД
 		result := db.Create(&user)               // создает новую запись в базе данных
 		if result.Error != nil {
-			// обработкcа ошибки создания
+
 		}
 		_, _ = bot.SendMessage(tu.Message(
 			tu.ID(update.Message.Chat.ID),
