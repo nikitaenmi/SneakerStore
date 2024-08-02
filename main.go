@@ -40,7 +40,8 @@ func main() {
 	Hellostring := "Приветствую в магазине кроссовок"
 	for update := range updates {
 
-		if update.Message.Text == "/start" {
+		bh.Handle(func(bot *telego.Bot, updateChan telego.Update) { //Start handle
+
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(update.Message.Chat.ID),
 				Hellostring,
@@ -48,7 +49,8 @@ func main() {
 			)
 
 			DAL.IdAdd(bot, update) // Добавление ID в БД
-		}
+
+		}, th.CommandEqual("start"))
 
 		bh.Handle(func(bot *telego.Bot, updateChan telego.Update) { //Start handle
 
@@ -68,18 +70,29 @@ func main() {
 			)
 		}, th.CallbackDataEqual("callback_hello1"))
 
-		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
+		if update.Message.Text == "/hello" {
 
-			fmt.Println("999999999999999999999999999999999999999999999999")
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(update.Message.GetChat().ID),
+				"Напшите какой вы хотите приветствие:",
+			))
+
+			Hellostring = update.Message.Text
+
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(update.Message.GetChat().ID),
+				"Приветствие изменено на:"+Hellostring,
+			))
+
+		}
+
+		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
 
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(query.Message.GetChat().ID),
 				"Напшите какой вы хотите приветствие:",
 			))
 
-			fmt.Println("888888888888888888888888888888888888888888888888888888888")
-
-			fmt.Println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			if update.Message != nil {
 				Hellostring = update.Message.Text
 			}
@@ -89,7 +102,7 @@ func main() {
 				"Приветствие изменено на:"+Hellostring,
 			))
 
-		}, th.CallbackDataEqual("callback_hello"))
+		}, th.CallbackDataEqual("admin"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //  Handler 1 main button
 			_, _ = bot.SendMessage(tu.Message(
@@ -118,6 +131,20 @@ func main() {
 				"Добавить в корзину:",
 			).WithReplyMarkup(kb.InlineKeyboardPuma))
 		}, th.CallbackDataEqual("callback_puma"))
+
+		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(query.Message.GetChat().ID),
+				"Добавить в корзину:",
+			).WithReplyMarkup(kb.InlineKeyboardAdidas))
+		}, th.CallbackDataEqual("callback_adidas"))
+
+		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(query.Message.GetChat().ID),
+				"Добавить в корзину:",
+			).WithReplyMarkup(kb.InlineKeyboardNike))
+		}, th.CallbackDataEqual("callback_nike"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
 

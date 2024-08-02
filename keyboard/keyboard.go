@@ -11,6 +11,8 @@ var InlineKeyboard *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_1"),
 		tu.InlineKeyboardButton("Корзина").
 			WithCallbackData("callback_2"),
+		tu.InlineKeyboardButton("Админка").
+			WithCallbackData("admin"),
 	),
 	tu.InlineKeyboardRow(
 		tu.InlineKeyboardButton("Связаться с менеджером").WithURL("https://example.com"),
@@ -55,6 +57,32 @@ var InlineKeyboardPuma *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_42size"),
 		tu.InlineKeyboardButton("Puma 43 size").
 			WithCallbackData("callback_puma43size"),
+		tu.InlineKeyboardButton("Главное меню").
+			WithCallbackData("callback_0"),
+	),
+)
+
+var InlineKeyboardAdidas *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
+	tu.InlineKeyboardRow(
+		tu.InlineKeyboardButton("Adidas 41 size").
+			WithCallbackData("callback_Adidas41size"),
+		tu.InlineKeyboardButton("Adidas 42 size").
+			WithCallbackData("callback_Adidas42size"),
+		tu.InlineKeyboardButton("Adidas 43 size").
+			WithCallbackData("callback_Adidas43size"),
+		tu.InlineKeyboardButton("Главное меню").
+			WithCallbackData("callback_0"),
+	),
+)
+
+var InlineKeyboardNike *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
+	tu.InlineKeyboardRow(
+		tu.InlineKeyboardButton("Nike 41 size").
+			WithCallbackData("callback_Nike41size"),
+		tu.InlineKeyboardButton("Nike 42 size").
+			WithCallbackData("callback_Nike42size"),
+		tu.InlineKeyboardButton("Nike 43 size").
+			WithCallbackData("callback_Nike43size"),
 		tu.InlineKeyboardButton("Главное меню").
 			WithCallbackData("callback_0"),
 	),
