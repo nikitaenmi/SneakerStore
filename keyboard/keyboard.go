@@ -11,7 +11,7 @@ var InlineKeyboard *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_1"),
 		tu.InlineKeyboardButton("Корзина").
 			WithCallbackData("callback_2"),
-		tu.InlineKeyboardButton("Админка").
+		tu.InlineKeyboardButton("Режим администратора").
 			WithCallbackData("admin"),
 	),
 	tu.InlineKeyboardRow(
@@ -87,3 +87,18 @@ var InlineKeyboardNike *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_0"),
 	),
 )
+
+var InlineKeyboardRandom *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
+	tu.InlineKeyboardRow(
+		tu.InlineKeyboardButton("Random 41 size").
+			WithCallbackData("callback_Random41size"),
+		tu.InlineKeyboardButton("Random 42 size").
+			WithCallbackData("callback_Random42size"),
+		tu.InlineKeyboardButton("Random 43 size").
+			WithCallbackData("callback_Random43size"),
+		tu.InlineKeyboardButton("Главное меню").
+			WithCallbackData("callback_0"),
+	),
+)
+
+//s
