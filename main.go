@@ -25,16 +25,6 @@ func main() {
 
 	updates, _ := bot.UpdatesViaLongPolling(nil)
 
-	// updateChan := make(chan telego.Update)
-
-	// go func() {
-	// 	for update := range updates {
-	// 		updateChan <- update
-	// 	}
-	// }()
-
-	// Stop reviving updates from update channel and shutdown webhook server
-
 	bh, _ := th.NewBotHandler(bot, updates)
 	defer bot.StopLongPolling()
 	Hellostring := "Приветствую в магазине кроссовок"
@@ -156,29 +146,18 @@ func main() {
 			))
 		}, th.CallbackDataEqual("callback_puma43size"))
 
-		// HelloChange := func(update telego.Update) bool {
+		bh.Handle(func(bot *telego.Bot, update telego.Update) { //Start handle
 
-		// 	// Get user ID from the message
-		// 	if th.CallbackDataContains("callback_hello") == true {
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(update.Message.Chat.ID),
+				"Я не понимаю текстовых сообщений:(",
+			).WithReplyMarkup(kb.InlineKeyboard),
+			)
 
-		// 		return true
-		// 	}
-		// 	return false
-
-		// }
-		// bh.Handle(func(bot *telego.Bot, update telego.Update) { //Start handle
-
-		// 	_, _ = bot.SendMessage(tu.Message(
-		// 		tu.ID(update.Message.Chat.ID),
-		// 		"Ку",
-		// 	).WithReplyMarkup(kb.InlineKeyboard),
-		// 	)
-
-		// }, th.AnyMessage())
+		}, th.AnyMessage())
 
 		bh.Handle(func(bot *telego.Bot, update telego.Update) {
 
-			fmt.Println("888888888888888888888888888888888888888888888888888888888")
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(update.Message.Chat.ID),
 				"Напшите какой вы хотите приветствие:",
@@ -188,7 +167,6 @@ func main() {
 				Hellostring = update.Message.Text
 
 			}
-			fmt.Println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 		}, th.CallbackDataEqual("callback_hello1")) // так нельзя делать тк это для коллбек хендлера
 		defer bh.Stop()
