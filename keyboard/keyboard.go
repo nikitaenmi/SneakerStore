@@ -42,10 +42,12 @@ var InlineKeyboard2 *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 	),
 )
 
-var InlineKeyboard3 *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
+var InlineKeyboardCart *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 	tu.InlineKeyboardRow(
 		tu.InlineKeyboardButton("Назад").
 			WithCallbackData("callback_0"),
+		tu.InlineKeyboardButton("Очистить корзину").
+			WithCallbackData("callback_deletecart"),
 	),
 )
 

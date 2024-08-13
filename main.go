@@ -116,7 +116,7 @@ func main() {
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(query.Message.GetChat().ID),
 				"Ваша корзина:",
-			).WithReplyMarkup(kb.InlineKeyboard3))
+			).WithReplyMarkup(kb.InlineKeyboardCart))
 		}, th.CallbackDataEqual("callback_2"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
@@ -188,7 +188,7 @@ func main() {
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) {
 
-			DAL.BrandAddInCart(bot, query, 43)
+			DAL.BrandAddInCart(bot, query, 43, "puma")
 
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(query.Message.GetChat().ID),
@@ -219,6 +219,18 @@ func main() {
 			}
 
 		}, th.CallbackDataEqual("callback_hello1")) // так нельзя делать тк это для коллбек хендлера
+
+		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) {
+
+			DAL.BrandDeleteInCart(bot, query)
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(update.Message.Chat.ID),
+				"Корзина очищена",
+			).WithReplyMarkup(kb.InlineKeyboard),
+			)
+
+		}, th.CallbackDataEqual("callback_deletecart"))
+
 		defer bh.Stop()
 
 		bh.Start()
