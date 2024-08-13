@@ -6,6 +6,7 @@ import (
 
 type Cart struct {
 	gorm.Model
-	ID        string
 	Namebrand string
+	Size      int
+	UserID    string
 }

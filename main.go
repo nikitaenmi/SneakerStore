@@ -129,6 +129,13 @@ func main() {
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(query.Message.GetChat().ID),
+				"Наши кроссовки:",
+			).WithReplyMarkup(kb.InlineKeyboard2))
+		}, th.CallbackDataEqual("callback_back"))
+
+		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(query.Message.GetChat().ID),
 				"Добавить в корзину:",
 			).WithReplyMarkup(kb.InlineKeyboardPuma))
 
@@ -179,9 +186,9 @@ func main() {
 
 		}, th.CallbackDataEqual("callback_nike"))
 
-		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
+		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) {
 
-			DAL.BrandAddInCart(bot, query)
+			DAL.BrandAddInCart(bot, query, 43)
 
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(query.Message.GetChat().ID),
@@ -189,7 +196,7 @@ func main() {
 			))
 		}, th.CallbackDataEqual("callback_puma43size"))
 
-		bh.Handle(func(bot *telego.Bot, update telego.Update) { //Start handle
+		bh.Handle(func(bot *telego.Bot, update telego.Update) {
 
 			_, _ = bot.SendMessage(tu.Message(
 				tu.ID(update.Message.Chat.ID),

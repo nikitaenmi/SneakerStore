@@ -54,14 +54,14 @@ func IdAdd(bot *telego.Bot, update telego.Update) {
 	)
 }
 
-func BrandAddInCart(bot *telego.Bot, query telego.CallbackQuery) {
+func BrandAddInCart(bot *telego.Bot, query telego.CallbackQuery, size int) {
 
-	userID := tu.ID(query.From.ID)                        // Взятие ID пользователя
-	userIDstring := userID.String()                       //ID в String
-	user := mod.Cart{ID: userIDstring, Namebrand: "Puma"} // Добавление ID в БД
-	result := db.Create(&user)                            // создает новую запись в базе данных
+	userID := tu.ID(query.From.ID)                                        // Взятие ID пользователя
+	userIDstring := userID.String()                                       //ID в String
+	user := mod.Cart{UserID: userIDstring, Namebrand: "Puma", Size: size} // Добавление ID в БД
+	result := db.Create(&user)                                            // создает новую запись в базе данных
 	if result.Error != nil {
-		// обработкcа ошибки создания
+		fmt.Println("Error brandAdd")
 	}
 
 }

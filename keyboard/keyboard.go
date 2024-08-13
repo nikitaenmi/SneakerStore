@@ -57,8 +57,8 @@ var InlineKeyboardPuma *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_42size"),
 		tu.InlineKeyboardButton("Puma 43 size").
 			WithCallbackData("callback_puma43size"),
-		tu.InlineKeyboardButton("Главное меню").
-			WithCallbackData("callback_0"),
+		tu.InlineKeyboardButton("Назад").
+			WithCallbackData("callback_back"),
 	),
 )
 
@@ -70,8 +70,8 @@ var InlineKeyboardAdidas *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_Adidas42size"),
 		tu.InlineKeyboardButton("Adidas 43 size").
 			WithCallbackData("callback_Adidas43size"),
-		tu.InlineKeyboardButton("Главное меню").
-			WithCallbackData("callback_0"),
+		tu.InlineKeyboardButton("Назад").
+			WithCallbackData("callback_back"),
 	),
 )
 
@@ -83,8 +83,8 @@ var InlineKeyboardNike *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_Nike42size"),
 		tu.InlineKeyboardButton("Nike 43 size").
 			WithCallbackData("callback_Nike43size"),
-		tu.InlineKeyboardButton("Главное меню").
-			WithCallbackData("callback_0"),
+		tu.InlineKeyboardButton("Назад").
+			WithCallbackData("callback_back"),
 	),
 )
 
@@ -100,5 +100,3 @@ var InlineKeyboardRandom *telego.InlineKeyboardMarkup = tu.InlineKeyboard(
 			WithCallbackData("callback_0"),
 	),
 )
-
-//s
