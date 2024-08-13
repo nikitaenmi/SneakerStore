@@ -40,6 +40,17 @@ func main() {
 
 			DAL.IdAdd(bot, update) // Добавление ID в БД
 
+			photo := tu.Photo(
+				// Chat ID as String (target username)
+				tu.ID(update.Message.Chat.ID),
+
+				// Send using file from disk
+				tu.File(mustOpen("img/beautifullphoto.jpg")),
+			).WithCaption("Hello")
+
+			// Sending photo
+			_, _ = bot.SendPhoto(photo)
+
 		}, th.CommandEqual("start"))
 
 		bh.Handle(func(bot *telego.Bot, updateChan telego.Update) { //Start handle
@@ -120,6 +131,17 @@ func main() {
 				tu.ID(query.Message.GetChat().ID),
 				"Добавить в корзину:",
 			).WithReplyMarkup(kb.InlineKeyboardPuma))
+
+			photo := tu.Photo(
+				// Chat ID as String (target username)
+				tu.ID(update.Message.Chat.ID),
+
+				// Send using file from disk
+				tu.File(mustOpen("img/puma.jpg")),
+			).WithCaption("Puma")
+
+			// Sending photo
+			_, _ = bot.SendPhoto(photo)
 		}, th.CallbackDataEqual("callback_puma"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
@@ -127,6 +149,16 @@ func main() {
 				tu.ID(query.Message.GetChat().ID),
 				"Добавить в корзину:",
 			).WithReplyMarkup(kb.InlineKeyboardAdidas))
+
+			photo := tu.Photo(
+				// Chat ID as String (target username)
+				tu.ID(update.Message.Chat.ID),
+
+				// Send using file from disk
+				tu.File(mustOpen("img/adidas.jpg")),
+			).WithCaption("Adidas")
+
+			_, _ = bot.SendPhoto(photo)
 		}, th.CallbackDataEqual("callback_adidas"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
@@ -134,6 +166,17 @@ func main() {
 				tu.ID(query.Message.GetChat().ID),
 				"Добавить в корзину:",
 			).WithReplyMarkup(kb.InlineKeyboardNike))
+			photo := tu.Photo(
+				// Chat ID as String (target username)
+				tu.ID(update.Message.Chat.ID),
+
+				// Send using file from disk
+				tu.File(mustOpen("img/nike.jpg")),
+			).WithCaption("Nike")
+
+			// Sending photo
+			_, _ = bot.SendPhoto(photo)
+
 		}, th.CallbackDataEqual("callback_nike"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler
@@ -174,4 +217,12 @@ func main() {
 		bh.Start()
 	}
 
+}
+
+func mustOpen(filename string) *os.File {
+	file, err := os.Open(filename)
+	if err != nil {
+		panic(err)
+	}
+	return file
 }
