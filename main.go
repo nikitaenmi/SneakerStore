@@ -117,6 +117,12 @@ func main() {
 				tu.ID(query.Message.GetChat().ID),
 				"Ваша корзина:",
 			).WithReplyMarkup(kb.InlineKeyboardCart))
+
+			res1, res2 := DAL.CartVision(bot, query)
+			_, _ = bot.SendMessage(tu.Message(
+				tu.ID(query.Message.GetChat().ID),
+				res1+res2,
+			))
 		}, th.CallbackDataEqual("callback_2"))
 
 		bh.HandleCallbackQuery(func(bot *telego.Bot, query telego.CallbackQuery) { //backHandler

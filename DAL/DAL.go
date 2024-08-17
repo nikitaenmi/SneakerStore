@@ -76,3 +76,19 @@ func BrandDeleteInCart(bot *telego.Bot, query telego.CallbackQuery) {
 	}
 
 }
+
+func CartVision(bot *telego.Bot, query telego.CallbackQuery) (string, string) {
+
+	type Cart struct {
+		Namebrand string
+		Size      int
+		UserID    string
+	}
+
+	userID := tu.ID(query.From.ID)
+	userIDstring := userID.String()
+	var result Cart
+	db.Raw("SELECT Namebrand,size FROM carts WHERE user_id = ?", userIDstring).Scan(&result)
+	return result.Namebrand, fmt.Sprintf("%d", result.Size)
+
+}
